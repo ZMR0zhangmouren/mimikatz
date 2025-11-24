@@ -22,13 +22,14 @@ jobs:
       run: |
         choco install visualstudio2017buildtools --version=15.9.45.0 -y
         choco install visualstudio2017-workload-vctools -y
+        choco install visualstudio2017-workload-vctools.v141 -y
 
     - name: Set up MSBuild
       uses: microsoft/setup-msbuild@v1
 
     - name: Build mimikatz
       run: |
-        msbuild /p:Configuration=Release /p:Platform=x64 /p:WindowsTargetPlatformVersion=10.0.19041.0 mimikatz.sln
+        msbuild /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v141 mimikatz.sln
 
     - name: Archive build artifacts
       uses: actions/upload-artifact@v4
