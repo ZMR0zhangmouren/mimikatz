@@ -22,7 +22,7 @@ jobs:
         msbuild /p:Configuration=Release /p:Platform=x64 mimikatz.sln
 
     - name: Archive build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: mimikatz-build
         path: |
