@@ -18,11 +18,11 @@ jobs:
       run: |
         choco install windows-sdk-8.1 -y
 
-    - name: Install v141_xp build tools
+    - name: Install v141 build tools
       run: |
         choco install visualstudio2017buildtools --version=15.9.45.0 -y
         choco install visualstudio2017-workload-vctools -y
-        choco install visualstudio2017-workload-vctools.v141 -y
+        "& 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe' modify --installPath 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 --quiet --wait --norestart"
 
     - name: Set up MSBuild
       uses: microsoft/setup-msbuild@v1
