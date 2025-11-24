@@ -24,6 +24,12 @@ jobs:
         choco install visualstudio2017-workload-vctools -y
         "& 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe' modify --installPath 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools' --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 --quiet --wait --norestart"
 
+    - name: Apply fixes for macro redefinition
+      run: |
+        echo "#ifndef PRINTER_NOTIFY_CATEGORY_ALL" >> modules/rpc/kull_m_rpc_ms-rprn.h
+        echo "#define PRINTER_NOTIFY_CATEGORY_ALL 0x00FFFFFF" >> modules/rpc/kull_m_rpc_ms-rprn.h
+        echo "#endif" >> modules/rpc/kull_m_rpc_ms-rprn.h
+
     - name: Set up MSBuild
       uses: microsoft/setup-msbuild@v1
 
