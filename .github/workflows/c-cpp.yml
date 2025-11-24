@@ -1,0 +1,29 @@
+name: Build mimikatz
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Build mimikatz
+      run: |
+        msbuild /p:Configuration=Release /p:Platform=x64 mimikatz.sln
+
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: mimikatz-build
+        path: |
+          x64/Release/
